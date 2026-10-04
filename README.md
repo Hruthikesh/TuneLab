@@ -1,159 +1,91 @@
 # TuneLab
 
-When does fine-tuning actually beat RAG?
+### When does fine-tuning actually beat RAG?
 
-TuneLab is a Text-to-SQL experiment I built to compare how a small
-language model performs under different ways of adapting it to a task.
+TuneLab is a project I built to understand the difference between RAG and
+fine-tuning for Text-to-SQL.
 
-The main comparison is:
+I wanted to test this properly instead of just assuming that one approach
+is better. So I am comparing zero-shot prompting, few-shot prompting, RAG,
+LoRA and QLoRA using the Spider dataset.
 
-- prompting
-- few-shot prompting
-- RAG
-- LoRA
-- QLoRA
+## What I'm trying to find out
 
-The idea is not to build another chatbot. I wanted to measure what
-actually changes when the training data, retrieval setup, and fine-tuning
-strategy are changed.
+The main question is simple:
 
-## Why I built this
+> When does fine-tuning actually become better than RAG?
 
-Fine-tuning and RAG are often discussed as alternatives, but the answer
-depends on the task, amount of training data, retrieval quality, and
-model.
-
-Text-to-SQL gives me a controlled way to study this because the generated
-SQL can be executed against the database and checked against the
-reference query.
-
-The main question I am investigating is:
-
-> When does fine-tuning actually outperform RAG?
+The answer could change depending on how much training data is available,
+how many examples RAG retrieves, the LoRA configuration and the amount of
+noise in the data.
 
 ## Dataset
 
-I use Spider 1.0.
+I'm using Spider 1.0 for the experiments.
 
 - 7,000 training examples
 - 1,034 development examples
 - 166 databases
-- multiple database domains
 
-The training data is kept separate from the evaluation data throughout
-the experiments.
+I created different training subsets from the training data:
 
-Training subsets:
+- 1%
+- 5%
+- 10%
+- 25%
+- 50%
+- 100%
 
-1%, 5%, 10%, 25%, 50%, 100%
+The development set is kept separate from the training data.
 
-## Models and methods
+## Methods
 
-The experiments use:
+The project currently compares:
 
-Qwen2.5-Coder-1.5B-Instruct
-
-I compare:
-
-| Method | What changes |
+| Method | Setup |
 |---|---|
-| Zero-shot | Prompt only |
-| Few-shot | Prompt + training examples |
-| RAG | Retrieves relevant examples/schema information |
-| LoRA | Parameter-efficient fine-tuning |
-| QLoRA | 4-bit quantized fine-tuning + LoRA |
+| Zero-shot | Question + schema |
+| Few-shot | Question + a few training examples |
+| RAG | Retrieves relevant examples |
+| LoRA | Fine-tunes the model with LoRA |
+| QLoRA | 4-bit model + LoRA |
 
-For LoRA I vary the rank.
+The base model I'm using is **Qwen2.5-Coder-1.5B-Instruct**.
 
-For QLoRA I use NF4 quantization with double quantization.
-
-## What I measure
-
-The main metric is Execution Accuracy.
-
-I also record:
-
-- Exact Match
-- SQL validity
-- error categories
-- inference latency
-- training time
-- GPU memory
-- trainable parameters
-- model/checkpoint size
-
-For the fine-tuning experiments I also vary the amount of training data.
-
-For RAG I vary the number of retrieved examples.
-
-I also introduce controlled noise into the training data to see how
-sensitive the different approaches are.
-
-## Experiment design
-
-The current experiment matrix contains 31 focused runs covering:
-
-- method comparison
-- training-data scaling
-- RAG retrieval depth
-- LoRA rank
-- training-data noise
-
-The exact configurations are stored in the experiment configuration
-files rather than being hard-coded into the README.
+For the experiments, I also change the RAG top-k value, LoRA rank,
+training-data size and training-data noise.
 
 ## Evaluation
 
-Every generated SQL query goes through the same evaluation pipeline.
+I don't want to judge the models only by whether their SQL looks similar
+to the reference query.
 
-For each example I check:
+The generated SQL is executed against the database and the result is
+compared with the reference result.
 
-1. Is the SQL syntactically valid?
-2. Can it be executed?
-3. Does its result match the reference query?
+I record:
 
-I also classify failures into categories such as:
+- Execution Accuracy
+- Exact Match
+- SQL validity
+- inference time
+- training time
+- GPU memory
+- trainable parameters
+- common SQL errors
 
-- wrong table
-- wrong column
-- wrong join
-- incorrect filter
-- aggregation
-- GROUP BY
-- ordering
-- nested query
-- syntax error
-- schema misunderstanding
-
-## Reproducibility
-
-Each run records the configuration, random seed, model and dataset
-information, hardware information, and experiment metadata.
-
-Research results are generated from actual runs.
-
-I don't include placeholder accuracy numbers in the repository.
+Some of the error categories include wrong tables, wrong columns, joins,
+filters, aggregation, ordering and syntax errors.
 
 ## Current status
 
-The complete pipeline and test suite are working.
+The main pipeline is implemented and the test suite is passing.
 
-Current local environment:
+The Spider dataset has been downloaded and checked locally, and the project
+is set up to run the experiments on my RTX 3050 Laptop GPU.
 
-- Windows
-- Python 3.11
-- PyTorch with CUDA
-- NVIDIA RTX 3050 Laptop GPU
-- 6 GB VRAM
-
-Spider has been downloaded and validated locally.
-
-Current verification:
-
-93 tests passed.
-
-The full research experiment matrix has not been completed yet. Results
-will be added after the GPU experiments are run.
+The actual research experiments are still being run, so there are no
+made-up results in this repository.
 
 ## Project structure
 
@@ -161,18 +93,10 @@ will be added after the GPU experiments are run.
 TuneLab/
 ├── configs/
 ├── data/
+├── docs/
+├── experiments/
+├── reports/
+├── scripts/
 ├── src/
 │   └── tunelab/
-│       ├── analysis/
-│       ├── data/
-│       ├── evaluation/
-│       ├── experiments/
-│       ├── models/
-│       ├── prompting/
-│       ├── retrieval/
-│       ├── training/
-│       └── utils/
-├── tests/
-├── scripts/
-├── experiments/
-└── reports/
+└── tests/
