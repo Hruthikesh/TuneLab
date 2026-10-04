@@ -1,0 +1,13 @@
+{
+  "run_id": "FAIL_01_RAG",
+  "experiment_id": "MAIN_EXP",
+  "method": "RAG",
+  "model": "qwen",
+  "dataset": "spider",
+  "dataset_version": "1.0",
+  "data_fraction": 1.0,
+  "rag_k": 3,
+  "status": "FAILED",
+  "error_message": "OOM or retrieval timeout",
+  "fixture_type": "TEST FIXTURE"
+}

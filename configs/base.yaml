@@ -1,0 +1,22 @@
+project_name: "tunelab"
+seed: 42
+
+paths:
+  data_dir: "data"
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  splits_dir: "data/splits"
+  results_dir: "experiments/results"
+  reports_dir: "reports"
+
+evaluation:
+  timeout_seconds: 5.0
+  float_tolerance: 0.0001
+  strict_order_on_order_by: true
+
+data:
+  benchmark: "spider"
+  dataset_version: "1.0"
+  train_split: "train"
+  val_split: "dev"
+  test_split: "dev"

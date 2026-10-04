@@ -1,0 +1,7 @@
+[
+  {
+    "db_id": "mock_ecommerce",
+    "question": "What is the total order amount across all orders?",
+    "query": "SELECT sum(total_amount) FROM orders"
+  }
+]

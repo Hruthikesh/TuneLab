@@ -1,0 +1,357 @@
+# Tier C: Main Research Experiment Manifest
+manifest_name: "main_research_matrix"
+description: "Comprehensive controlled experiment matrix addressing the core research questions."
+
+experiments:
+  # -------------------------------------------------------------
+  # 1. Primary Method Comparison (100% data, Seed 42)
+  # -------------------------------------------------------------
+  - experiment_id: "EXP01_ZERO_SHOT"
+    method: "ZERO_SHOT"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP01_FEW_SHOT_K3"
+    method: "FEW_SHOT"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    seed: 42
+    training_settings: { few_shot_k: 3 }
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP01_RAG_K3"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 3
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP01_LORA_R8"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP01_QLORA_R8"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  # -------------------------------------------------------------
+  # 2. Data Scaling Curve (LoRA vs QLoRA across 1%, 5%, 10%, 25%, 50%, 100%)
+  # -------------------------------------------------------------
+  - experiment_id: "EXP02_LORA_1PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.01
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_LORA_5PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.05
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_LORA_10PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_LORA_25PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.25
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_LORA_50PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.50
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_QLORA_1PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.01
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_QLORA_5PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.05
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_QLORA_10PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_QLORA_25PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.25
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP02_QLORA_50PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.50
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  # -------------------------------------------------------------
+  # 3. RAG Retrieval Depth Ablation (K=1, 3, 5, 10)
+  # -------------------------------------------------------------
+  - experiment_id: "EXP03_RAG_K1"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 1
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP03_RAG_K5"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 5
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP03_RAG_K10"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 10
+    seed: 42
+    hardware_requirements: "cuda"
+
+  # -------------------------------------------------------------
+  # 4. LoRA Rank Ablation (r=4, 8, 16)
+  # -------------------------------------------------------------
+  - experiment_id: "EXP04_LORA_R4"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 4
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP04_LORA_R16"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 16
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP04_QLORA_R4"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 4
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP04_QLORA_R16"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 16
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    seed: 42
+    hardware_requirements: "cuda"
+
+  # -------------------------------------------------------------
+  # 5. Noise Sensitivity (0%, 5%, 10%, 20%)
+  # -------------------------------------------------------------
+  - experiment_id: "EXP05_RAG_NOISE_5PCT"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 3
+    noise_level: 0.05
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_RAG_NOISE_10PCT"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 3
+    noise_level: 0.10
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_RAG_NOISE_20PCT"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 3
+    noise_level: 0.20
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_LORA_NOISE_5PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    noise_level: 0.05
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_LORA_NOISE_10PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    noise_level: 0.10
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_LORA_NOISE_20PCT"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    noise_level: 0.20
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_QLORA_NOISE_5PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    noise_level: 0.05
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_QLORA_NOISE_10PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    noise_level: 0.10
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "EXP05_QLORA_NOISE_20PCT"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    lora_rank: 8
+    qlora_config: { load_in_4bit: true, quant_type: "nf4", double_quant: true, compute_dtype: "bfloat16" }
+    noise_level: 0.20
+    noise_type: "sql_syntax_corruption"
+    seed: 42
+    hardware_requirements: "cuda"

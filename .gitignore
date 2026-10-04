@@ -1,0 +1,36 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv/
+env/
+venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+
+# Large checkpoints & weights
+checkpoints/
+models/
+*.pt
+*.bin
+*.safetensors
+
+# Data archives
+data/raw/*.zip
+data/raw/spider/
+data/raw/spider.zip
+
+# Results
+experiments/results/raw/*.json
+!experiments/results/.gitkeep
+
+# Generated research artifacts
+data/processed/
+data/splits/
+experiments/runs/
+experiments/pilot_dev*.json
+reports/analysis/
+reports/research_report.md

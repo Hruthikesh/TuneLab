@@ -1,0 +1,13 @@
+{
+  "run_id": "PENDING_01_QLORA",
+  "experiment_id": "MAIN_EXP",
+  "method": "QLORA",
+  "model": "qwen",
+  "dataset": "spider",
+  "dataset_version": "1.0",
+  "data_fraction": 1.0,
+  "lora_rank": 8,
+  "status": "PENDING_GPU",
+  "error_message": "CUDA required",
+  "fixture_type": "TEST FIXTURE"
+}

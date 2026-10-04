@@ -1,0 +1,59 @@
+# Tier B: Pilot Experiment Manifest (Small slice of real Spider on GPU)
+manifest_name: "pilot_experiment"
+description: "Pilot study on a subset of official Spider data to test model loading and training integration."
+
+experiments:
+  - experiment_id: "PILOT_ZERO_SHOT"
+    method: "ZERO_SHOT"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "PILOT_FEW_SHOT"
+    method: "FEW_SHOT"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    seed: 42
+    training_settings:
+      few_shot_k: 3
+    hardware_requirements: "cuda"
+
+  - experiment_id: "PILOT_RAG"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    rag_k: 3
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "PILOT_LORA"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cuda"
+
+  - experiment_id: "PILOT_QLORA"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider"
+    dataset_version: "1.0"
+    data_fraction: 0.10
+    lora_rank: 8
+    qlora_config:
+      load_in_4bit: true
+      quant_type: "nf4"
+      double_quant: true
+      compute_dtype: "bfloat16"
+    seed: 42
+    hardware_requirements: "cuda"

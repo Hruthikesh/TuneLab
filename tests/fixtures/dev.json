@@ -1,0 +1,12 @@
+[
+  {
+    "db_id": "mock_inventory",
+    "question": "What is the total quantity of items in the Kharagpur warehouse?",
+    "query": "SELECT sum(T2.quantity) FROM warehouse AS T1 JOIN item AS T2 ON T1.warehouse_id = T2.warehouse_id WHERE T1.city = 'Kharagpur'"
+  },
+  {
+    "db_id": "mock_inventory",
+    "question": "List the names of all items in stock.",
+    "query": "SELECT item_name FROM item"
+  }
+]

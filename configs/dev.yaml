@@ -1,0 +1,28 @@
+# Development / CPU-only smoke test configuration
+mode: "dev"
+device: "cpu"
+seed: 42
+
+model:
+  name: "Qwen/Qwen2.5-Coder-0.5B-Instruct"
+  torch_dtype: "float32"
+  max_seq_length: 512
+  quantization: null
+
+retrieval:
+  backend: "bm25"
+  top_k: 3
+
+training:
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  epochs: 1
+  learning_rate: 0.0002
+  lora_r: 4
+  lora_alpha: 8
+  lora_dropout: 0.05
+  data_fractions: [1.0]
+
+evaluation:
+  max_samples: 5
+  timeout_seconds: 5.0

@@ -1,0 +1,12 @@
+{
+  "run_id": "DRY_01_LORA",
+  "experiment_id": "MAIN_EXP",
+  "method": "LORA",
+  "model": "qwen",
+  "dataset": "spider",
+  "dataset_version": "1.0",
+  "data_fraction": 0.5,
+  "lora_rank": 8,
+  "status": "DRY_RUN_ONLY",
+  "fixture_type": "TEST FIXTURE"
+}

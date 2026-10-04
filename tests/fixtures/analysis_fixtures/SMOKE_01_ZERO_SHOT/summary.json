@@ -1,0 +1,18 @@
+{
+  "run_id": "SMOKE_01_ZERO_SHOT",
+  "experiment_id": "SMOKE_TEST",
+  "method": "ZERO_SHOT",
+  "model": "mock",
+  "dataset": "fixtures",
+  "dataset_version": "1.0",
+  "data_fraction": 1.0,
+  "status": "COMPLETED",
+  "total_examples": 2,
+  "sql_validity": 1.0,
+  "exact_match": 1.0,
+  "execution_accuracy": 1.0,
+  "mean_latency_ms": 5.0,
+  "is_smoke": true,
+  "is_fixture": true,
+  "fixture_type": "TEST FIXTURE"
+}

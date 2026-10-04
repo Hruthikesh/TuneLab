@@ -1,0 +1,22 @@
+[
+  {
+    "db_id": "mock_university",
+    "question": "What is the average GPA of all students?",
+    "query": "SELECT avg(gpa) FROM student"
+  },
+  {
+    "db_id": "mock_university",
+    "question": "Find the names of students enrolled in Algorithms.",
+    "query": "SELECT T1.name FROM student AS T1 JOIN enrollment AS T2 ON T1.student_id = T2.student_id JOIN course AS T3 ON T2.course_id = T3.course_id WHERE T3.title = 'Algorithms'"
+  },
+  {
+    "db_id": "mock_ecommerce",
+    "question": "List all customers from India.",
+    "query": "SELECT name FROM customer WHERE country = 'India'"
+  },
+  {
+    "db_id": "mock_ecommerce",
+    "question": "How many orders were placed by customer 1?",
+    "query": "SELECT count(*) FROM orders WHERE customer_id = 1"
+  }
+]

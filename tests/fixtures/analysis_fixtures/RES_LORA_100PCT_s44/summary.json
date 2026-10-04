@@ -1,0 +1,23 @@
+{
+  "run_id": "RES_LORA_100PCT_s44",
+  "experiment_id": "EXP01_METHOD_COMP",
+  "method": "LORA",
+  "model": "qwen_2.5_coder_1.5b",
+  "dataset": "spider",
+  "dataset_version": "1.0",
+  "data_fraction": 1.0,
+  "lora_rank": 8,
+  "noise_level": 0.0,
+  "seed": 44,
+  "status": "COMPLETED",
+  "total_examples": 100,
+  "sql_validity": 0.95,
+  "exact_match": 0.62,
+  "execution_accuracy": 0.7,
+  "mean_latency_ms": 44.0,
+  "training_time_s": 300.0,
+  "peak_vram_mb": 4200.0,
+  "trainable_parameters": 1376256,
+  "total_parameters": 1543714816,
+  "fixture_label": "TEST FIXTURE"
+}

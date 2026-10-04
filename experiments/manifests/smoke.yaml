@@ -1,0 +1,59 @@
+# Tier A: Smoke Test Manifest (5 runs, all methods, CPU-runnable with fixtures)
+manifest_name: "smoke_test"
+description: "Pipeline validation across all 5 methods using synthetic fixtures."
+
+experiments:
+  - experiment_id: "SMOKE_01_ZERO_SHOT"
+    method: "ZERO_SHOT"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider_fixtures"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    seed: 42
+    hardware_requirements: "cpu"
+
+  - experiment_id: "SMOKE_02_FEW_SHOT"
+    method: "FEW_SHOT"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider_fixtures"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    seed: 42
+    training_settings:
+      few_shot_k: 2
+    hardware_requirements: "cpu"
+
+  - experiment_id: "SMOKE_03_RAG"
+    method: "RAG"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider_fixtures"
+    dataset_version: "1.0"
+    data_fraction: 1.0
+    rag_k: 3
+    seed: 42
+    hardware_requirements: "cpu"
+
+  - experiment_id: "SMOKE_04_LORA"
+    method: "LORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider_fixtures"
+    dataset_version: "1.0"
+    data_fraction: 0.5
+    lora_rank: 8
+    seed: 42
+    hardware_requirements: "cpu"
+
+  - experiment_id: "SMOKE_05_QLORA"
+    method: "QLORA"
+    model: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    dataset: "spider_fixtures"
+    dataset_version: "1.0"
+    data_fraction: 0.5
+    lora_rank: 8
+    qlora_config:
+      load_in_4bit: true
+      quant_type: "nf4"
+      double_quant: true
+      compute_dtype: "bfloat16"
+    seed: 42
+    hardware_requirements: "cpu"
