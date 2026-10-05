@@ -5,7 +5,7 @@ seed: 42
 
 model:
   name: "Qwen/Qwen2.5-Coder-1.5B-Instruct"
-  torch_dtype: "bfloat16"
+  torch_dtype: "float16"
   max_seq_length: 1024
   quantization: "4bit"
 
